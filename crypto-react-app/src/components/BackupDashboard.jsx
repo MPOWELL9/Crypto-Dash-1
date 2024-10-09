@@ -3,33 +3,33 @@ import { useState, useEffect } from 'react';
 import SearchPanel from "./SearchPanel";
 import CryptoCard from "./CryptoCard";
 
-const CryptoCoins = [{
+const CryptoCoins=[{
     Name: "Bitcoin",
     Price: "$59789.00",
     MarketCap: "$1,175,931,107,572",
     Volume: "$34,395,405,407,507",
-    Change: "6.25%",
+    Change: "-6.25%",
     Icon: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-}];
-const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11ed';
-const coinMarketCapApiUrl = 'some-url';
-//1. component mount-useEffect hook
-//2. get data-using fetch api
-//3. set the coin data from market cap api
-//4. handle loading and errors
+    }];
+    const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11ed';
+    const coinMarketCapApiUrl = 'some-url';
+    //1. component mount-useEffect hook
+    //2. get data-using fetch api
+    //3. set the coin data from market cap api
+    //4. handle loading and errors
 
-const CryptoDashboard = () => {
+const CryptoDashboard=() => {
 
     //default the data to the coin array..
     const [coinData, setCoinData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
 
     const handleSearch = (searchText) => {
 
 
         if (searchText === "") {
-            alert('Enter a crypto coin to search')
+            alert('Enter a crypto coin to search');
 
             return;
         }
@@ -37,19 +37,18 @@ const CryptoDashboard = () => {
 
         //TODO filter the crypto coin list by searchText
         //use ES6 array method filter.
-
         const filterCoins = coinData.filter(coin => coin.Name.includes(searchText));
         //set stare to filter coins and re-render on update
-        setCoinData(filterCoins)
+        setCoinData(filterCoins);
 
-    }
+    };
 
 
     //componet mounted, fire once ===> empty dependeny arrary
     useEffect(() => {
-        console.log('component mounted..')
+        console.log('component mounted..');
         fetchData();
-    }, [])
+    }, []);
 
 
 
@@ -59,33 +58,30 @@ const CryptoDashboard = () => {
             const response = await fetch(coinMarketCapApiUrl, {
                 headers: {
                     'X-CMC_PRO_API_KEY': coinMarketCapApiKey
-
                 },
-                params: {
-
-                }
+                params: {}
             });
             if (!response.ok) {
-                throw new Error('There was an error Loading data..')
+                throw new Error('There was an error Loading data..');
             }
             const data = await response.json();
-            console.log('coin market data: ${JSON.stringify({data}')
+            console.log('coin market data: ${JSON.stringify({data}');
         }
         catch (error) {
-            setError('There was an error loading data..')
+            setError('There was an error loading data..');
 
         }
         finally {
             setIsLoading(false);
         }
-    }
+    };
 
     if (isLoading) {
-        return <p style={{ textAlign: 'center' }}>Loading....</p>
+        return <p style={{ textAlign: 'center' }}>Loading....</p>;
     }
 
     if (error) {
-        return <p style={{ textAlign: 'center' }}>{error.message}</p>
+        return <p style={{ textAlign: 'center' }}>{error.message}</p>;
     }
 
 
@@ -94,15 +90,12 @@ const CryptoDashboard = () => {
             <h1> Crypto Coin Tracker</h1>
             <SearchPanel searchCallback={handleSearch} />
             <div className="crypto-container">
-                {
-                    coinData.data.map((currentCoin) => {
-                        return <CryptoCard
-                            {...currentCoin}
-                            searchCallback={handleSearch}
-                        />
+                {coinData.data.map((currentCoin) => {
+                    return <CryptoCard
+                        {...currentCoin}
+                        searchCallback={handleSearch} />;
 
-                    })
-                }
+                })}
 
                 <CryptoCard {...'bitCoin'} />
 
@@ -171,11 +164,8 @@ const CryptoDashboard = () => {
             </div>
         </div>
 
-    </>
+         </>
 
 }
-
-
-
 
 export default CryptoDashboard;
