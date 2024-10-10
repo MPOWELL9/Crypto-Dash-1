@@ -2,7 +2,7 @@
 import {useState, useEffect} from 'react';
 import SearchPanel from "./SearchPanel";
 import CryptoCard from "./CryptoCard";
-{
+
 
 const CryptoCoins=[{
     Name: "Bitcoin",
@@ -27,25 +27,23 @@ const CryptoCoins=[{
         const [error,setError]= useState(null);
 
         const handleSearch =(searchText) => {
-        }
 
-    
-            if(searchText ==="") {
-                 alert('Enter a crypto coin to search')
-                 
-                 return;
+            if (searchText === "") {
+                alert('Enter a crypto coin to search')
+
+                return;
             }
-           
-           
+
+
             //TODO filter the crypto coin list by searchText
             //use ES6 array method filter.
 
-            const filterCoins = coinData.filter(coin=>coin.Name.includes(searchText));
+            const filterCoins = coinData.filter(coin => coin.Name.includes(searchText));
             //set stare to filter coins and re-render on update
-            setCoinData (filterCoins)
-
+            setCoinData(filterCoins)
         }
 
+    
 
         //componet mounted, fire once ===> empty dependeny arrary
         useEffect(()=>{
@@ -74,6 +72,7 @@ const CryptoCoins=[{
                 console.log ('coin market data: ${JSON.stringify({data}')
             }
             catch (error){
+                    console.error(`There was an error ${error}`) // output error to the console..
                     setError('There was an error loading data..')
 
             }
@@ -89,7 +88,7 @@ const CryptoCoins=[{
 
         
             if (error) {
-                return <p style={{ textAlign: 'center' }}>{error.message}</p>
+                return <p style={{ textAlign: 'center' }}>{error}</p>
             }
         
             
@@ -187,9 +186,3 @@ const CryptoCoins=[{
 
 
 export default CryptoDashboard; 
-
-function newFunction() {
-    return <p style={{ textAlign: 'center' }}>Loading....</p>;
-}
-
-<p></p>

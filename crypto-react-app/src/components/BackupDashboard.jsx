@@ -81,7 +81,7 @@ const CryptoDashboard=() => {
     }
 
     if (error) {
-        return <p style={{ textAlign: 'center' }}>{error.message}</p>;
+        return <p style={{ textAlign: 'center' }}>{error}</p>;
     }
 
 
