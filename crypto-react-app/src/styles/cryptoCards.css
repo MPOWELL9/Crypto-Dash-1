@@ -65,3 +65,10 @@ input, select {
 &:hover {
     transform: translate(5px);
 }
+
+.navigation-container {
+    display: flex;
+    justify-content: center;
+}
+    
+

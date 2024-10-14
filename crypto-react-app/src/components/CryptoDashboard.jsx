@@ -22,7 +22,7 @@ const CryptoCoins=[{
     const CryptoDashboard =() => {
 
         //default the data to the coin array..
-        const [coinData, setCoinData] = useState(CryptoCoins);
+        const [coinData, setCoinData] = useState([]);
         const [isLoading,setIsLoading]=useState(true);
         const [error,setError]= useState(null);
 
@@ -59,16 +59,18 @@ const CryptoCoins=[{
                 const response = await fetch (coinMarketCapApiUrl, {
                     headers:{
                         'X-CMC_PRO_API_KEY': coinMarketCapApiKey
-
-                    },
+                     },
                     params:{
-
-                    }
+                        start: 1,
+                        limit: 10,
+                        convert: 'USD',
+                     }
                 });
                 if(!response.ok){
                     throw new Error('There was an error Loading data..')
                 }
                 const data =await response.json();
+                
                 console.log ('coin market data: ${JSON.stringify({data}')
             }
             catch (error){
