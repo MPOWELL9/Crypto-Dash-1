@@ -71,7 +71,7 @@ const CryptoCoins=[{
                 }
                 const data =await response.json();
                 
-                console.log ('coin market data: ${JSON.stringify({data}')
+                console.log(`coin market data: ${JSON.stringify(data)}`)
             }
             catch (error){
                     console.error(`There was an error ${error}`) // output error to the console..

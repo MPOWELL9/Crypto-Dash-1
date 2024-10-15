@@ -7,18 +7,30 @@ import ReactDOM from 'react';
 
 import Navigation from './components/Navigation';
 
-import { BrowserRouter, Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import Watchlist from './components/Watchlist';
 function App() {
   return (
-    <><Navigation/>
+    <>
+          <Router>
+              <Navigation />
+              <Routes>
+                  <Route path="/" element={<CryptoDashboard />} />
+                  <Route path="/watchlist" element={<Watchlist />} />
+                  <Route path="*" element={<div>Not Found!</div>} />
+
+              </Routes>
+          </Router>
+    
+    {/* <Navigation/>
     <Router>
       <Router path = "/" element={ <CryptoDashboard/>}/>
       <Router path = "/watchlist" element={<Watchlist/>}/>
       <Router path = "*" element={<div>Not Found!</div>}/>
 
-    </Router>
+    </Router> */}
+
   </>
   );
 }
