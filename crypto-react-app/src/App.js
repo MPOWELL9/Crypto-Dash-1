@@ -13,23 +13,15 @@ import Watchlist from './components/Watchlist';
 function App() {
   return (
     <>
-          <Router>
-              <Navigation />
-              <Routes>
-                  <Route path="/" element={<CryptoDashboard />} />
-                  <Route path="/watchlist" element={<Watchlist />} />
-                  <Route path="*" element={<div>Not Found!</div>} />
-
-              </Routes>
-          </Router>
-    
-    {/* <Navigation/>
-    <Router>
-      <Router path = "/" element={ <CryptoDashboard/>}/>
-      <Router path = "/watchlist" element={<Watchlist/>}/>
-      <Router path = "*" element={<div>Not Found!</div>}/>
-
-    </Router> */}
+      <Router>
+      <Navigation/>
+      <Routes>
+            <Route path = "/" element={ <CryptoDashboard/>}/>
+            <Route path = "/watchlist" element={<Watchlist/>}/>
+            <Route path = "*" element={<div>Not Found!</div>}/>
+       
+      </Routes>
+      </Router> 
 
   </>
   );
