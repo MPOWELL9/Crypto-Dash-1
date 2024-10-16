@@ -8,7 +8,7 @@ const Navigation=() => {
         Navigation Bar
         <ul>
             <li>
-                    <Link to="/dashboard">Dashborad</Link>
+                    <Link to="/">Dashborad</Link>
             </li>
              <li>
                     <Link to= "/watch">Watchlist</Link>

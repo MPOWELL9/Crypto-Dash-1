@@ -31,10 +31,13 @@ const CryptoCard = (props) => {
             <p>Market Cap:${props.quote.USD.market_cap.toLocaleString()}</p>
             <p>24h Volume:${props.quote.USD.volume_24.toLocaleString()}</p>
             <p>24h Change:{props.quote.USD.percent_change_24h.toFixed(2)}%</p> */}
-            <p>${props.quote.USD.price.toFixed(2)}</p>
-            <p>${props.quote.USD.market_cap.toLocalString()}</p>
-            <p>${props.quote.USD.volume_24h.toLocalString()}</p>
-            <p>{props.confirm.quote.USD.percent_change_24h.toFixed(2)}%</p>
+            {props.quote && <>
+                <p>${props.quote.USD.price.toFixed(2)}</p>
+                <p>${props.quote.USD.market_cap.toLocalString()}</p>
+                <p>${props.quote.USD.volume_24h.toLocalString()}</p>
+                <p>{props.confirm.quote.USD.percent_change_24h.toFixed(2)}%</p>
+            </>
+            }
         <button onClick= {handleAddWatchlist}>Add watchlist</button>
             
             

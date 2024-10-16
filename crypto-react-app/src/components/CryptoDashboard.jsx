@@ -23,7 +23,7 @@ const CryptoCoins=[{
 
         //default the data to the coin array..
         const [coinData, setCoinData] = useState([]);
-        const [isLoading,setIsLoading]=useState(true);
+        const [isLoading,setIsLoading]=useState(false);
         const [error,setError]= useState(null);
 
         const handleSearch =(searchText) => {
@@ -48,7 +48,7 @@ const CryptoCoins=[{
         //componet mounted, fire once ===> empty dependeny arrary
         useEffect(()=>{
             console.log('component mounted..')
-            fetchData();
+            // fetchData();
          }, []) 
 
 
@@ -102,7 +102,7 @@ const CryptoCoins=[{
                <div className= "crypto-container">
                  
                    {
-                       coinData.data.map((currentCoin) => {
+                       coinData?.data?.map((currentCoin) => {
                            return <CryptoCard
                                {...currentCoin}
                                searchCallback={handleSearch}
