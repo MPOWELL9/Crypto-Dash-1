@@ -37,7 +37,7 @@ const CryptoDashboard=() => {
 
         //TODO filter the crypto coin list by searchText
         //use ES6 array method filter.
-        const filterCoins = coinData.filter(coin => coin.Name.includes(searchText));
+    
         //set stare to filter coins and re-render on update
         setCoinData(filterCoins);
 

@@ -4,14 +4,7 @@ import SearchPanel from "./SearchPanel";
 import CryptoCard from "./CryptoCard";
 
 
-const CryptoCoins=[{
-    Name: "Bitcoin",
-    Price: "$59789.00",
-    MarketCap:"$1,175,931,107,572",
-    Volume: "$34,395,405,407,507",
-    Change: "6.25%",
-    Icon: "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"
-    }];
+
     const coinMarketCapApiKey ='d828f78d-9d58-4241-91a2-d42ede5c11ed';
     const coinMarketCapApiUrl= 'some-url';
     //1. component mount-useEffect hook
@@ -22,25 +15,39 @@ const CryptoCoins=[{
     const CryptoDashboard =() => {
 
         //default the data to the coin array..
-        const [coinData, setCoinData] = useState([]);
+        const[coinData,setCoinData]=useState([]);
+        //filtered data
+        const [filterData, setFilterData]= useState([])
+    
+    
         const [isLoading,setIsLoading]=useState(false);
         const [error,setError]= useState(null);
 
         const handleSearch =(searchText) => {
+            debugger
+            
 
             if (searchText === "") {
                 alert('Enter a crypto coin to search')
+                //reset the full list to [] or default coin data from api
+                setCoinData(coinData);
 
                 return;
             }
-
-
+            
             //TODO filter the crypto coin list by searchText
             //use ES6 array method filter.
+             const filterCoins= coinData?.(coin=> coin.name.toLowerCase (). includes (searchText.toLowerCase()))
 
-            const filterCoins = coinData.filter(coin => coin.Name.includes(searchText));
+             debugger
+                
+
+        
+            
             //set stare to filter coins and re-render on update
-            setCoinData(filterCoins)
+            //wrong array, set the filtered data, not default
+            setFilterData(filterCoins)
+            
         }
 
     
@@ -48,12 +55,12 @@ const CryptoCoins=[{
         //componet mounted, fire once ===> empty dependeny arrary
         useEffect(()=>{
             console.log('component mounted..')
-            // fetchData();
+            fetchData();
          }, []) 
 
 
 
-         const fetchData= async()=>{
+         const fetchData = async()=>{
             console.log('fetch data..');
             try {
                 const response = await fetch (coinMarketCapApiUrl, {
@@ -63,16 +70,25 @@ const CryptoCoins=[{
                     params:{
                         start: 1,
                         limit: 10,
-                        convert: 'USD',
+                        convert: 'USD'
                      }
                 });
                 if(!response.ok){
                     throw new Error('There was an error Loading data..')
                 }
                 const data =await response.json();
-                
                 console.log(`coin market data: ${JSON.stringify(data)}`)
+                //set the inital default data, once on Loading...
+                setCoinData("rawData.data");
+                //set the working filtered data
+                setFilterData("rawData.data");
+           
             }
+
+
+             
+            
+            
             catch (error){
                     console.error(`There was an error ${error}`) // output error to the console..
                     setError('There was an error loading data..')
@@ -100,9 +116,8 @@ const CryptoCoins=[{
         <h1> Crypto Coin Tracker</h1>
                <SearchPanel searchCallback={handleSearch} />
                <div className= "crypto-container">
-                 
-                   {
-                       coinData?.data?.map((currentCoin) => {
+                {
+                filterData?.map((currentCoin) => {
                            return <CryptoCard
                                {...currentCoin}
                                searchCallback={handleSearch}

@@ -17,7 +17,7 @@ function App() {
       <Navigation/>
       <Routes>
             <Route path = "/" element={ <CryptoDashboard/>}/>
-            <Route path = "/watchlist" element={<Watchlist/>}/>
+            <Route path = "/Watchlist" element={<Watchlist/>}/>
             <Route path = "*" element={<div>Not Found!</div>}/>
        
       </Routes>

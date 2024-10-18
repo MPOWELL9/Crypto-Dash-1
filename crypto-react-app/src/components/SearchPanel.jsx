@@ -41,7 +41,7 @@ const SearchPanel= (props) =>{
             <option value="total_volume">24h Volume</option>
             <option value="price_change_percentage_24h">24h Change</option>
     </select>
-    <button onClick= {handleClick}>Search</button>
+    <button style= {{height: 40, width: 100}} onClick= {handleClick}>Search</button>
     </>
 }
 
