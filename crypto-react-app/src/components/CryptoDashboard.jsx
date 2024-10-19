@@ -5,8 +5,10 @@ import CryptoCard from "./CryptoCard";
 
 
 
-    const coinMarketCapApiKey ='d828f78d-9d58-4241-91a2-d42ede5c11ed';
-    const coinMarketCapApiUrl= 'some-url';
+    //const coinMarketCapApiKey ='d828f78d-9d58-4241-91a2-d42ede5c11ed';
+    //const coinMarketCapApiUrl= 'some-url';
+const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
+    const coinMarketCapApiUrl = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
     //1. component mount-useEffect hook
     //2. get data-using fetch api
     //3. set the coin data from market cap api
@@ -76,12 +78,12 @@ import CryptoCard from "./CryptoCard";
                 if(!response.ok){
                     throw new Error('There was an error Loading data..')
                 }
-                const data =await response.json();
-                console.log(`coin market data: ${JSON.stringify(data)}`)
+                const rawData =await response.json();
+                console.log(`coin market data: ${JSON.stringify(rawData)}`)
                 //set the inital default data, once on Loading...
-                setCoinData("rawData.data");
+                setCoinData(rawData.data);
                 //set the working filtered data
-                setFilterData("rawData.data");
+                setFilterData(rawData.data);
            
             }
 
