@@ -19,11 +19,21 @@ const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
         //default the data to the coin array..
         const[coinData,setCoinData]=useState([]);
         //filtered data
-        const [filterData, setFilterData]= useState([])
+        const [filterData, setFilterData]= useState([]);
+        //sort data
+        const [sortType, setSortType]= useState("Market_Cap");
     
     
         const [isLoading,setIsLoading]=useState(false);
         const [error,setError]= useState(null);
+
+        //pass to search panel component, to get
+
+        const handleSortType = (sortType)=> {
+            console.log ('sort type changed..${sortType}')
+           
+            setSortType(sortType);
+        }
 
         const handleSearch =(searchText) => {
             debugger
@@ -31,22 +41,25 @@ const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
 
             if (searchText === "") {
                 alert('Enter a crypto coin to search')
-                //reset the full list to [] or default coin data from api
-                setCoinData(coinData);
+                //reset the full filtered list to [] or default coin data from api
+                setFilterData(coinData);
 
                 return;
             }
             
             //TODO filter the crypto coin list by searchText
             //use ES6 array method filter.
-             const filterCoins= coinData?.(coin=> coin.name.toLowerCase (). includes (searchText.toLowerCase()))
+
+            //BUG!:
+            //1. fix search text to lower case
+            //2. set object, with .data property,
+            //unhook static data and use default data
+             const filterCoins=coinData?.filter(coin=> coin.name.toLowerCase (). includes (searchText.toLowerCase()))
 
              debugger
-                
-
-        
-            
-            //set stare to filter coins and re-render on update
+             console.log(filterCoins)
+             
+             //set state to filter coins and re-render on update
             //wrong array, set the filtered data, not default
             setFilterData(filterCoins)
             
@@ -80,7 +93,7 @@ const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
                 }
                 const rawData =await response.json();
                 console.log(`coin market data: ${JSON.stringify(rawData)}`)
-                //set the inital default data, once on Loading...
+                //set the inital default data, once set once on Load!!!
                 setCoinData(rawData.data);
                 //set the working filtered data
                 setFilterData(rawData.data);
@@ -92,8 +105,8 @@ const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
             
             
             catch (error){
-                    console.error(`There was an error ${error}`) // output error to the console..
-                    setError('There was an error loading data..')
+                    
+                    setError(error)
 
             }
             finally{
@@ -116,7 +129,10 @@ const coinMarketCapApiKey = 'd828f78d-9d58-4241-91a2-d42ede5c11de';
        return <>
         <div className="app">
         <h1> Crypto Coin Tracker</h1>
-               <SearchPanel searchCallback={handleSearch} />
+               <SearchPanel 
+               searchCallback={handleSearch} 
+               sortTypeCallback={handleSortType}
+               />
                <div className= "crypto-container">
                 {
                 filterData?.map((currentCoin) => {

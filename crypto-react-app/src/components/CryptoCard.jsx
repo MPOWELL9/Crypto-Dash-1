@@ -4,7 +4,7 @@
 // MarketCap: "$1,175,931,107,572",
  //Volume: "$34,395,407,507",
 //Change: "-6.25%",
-//Icon:"https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",//}
+//Icon:"https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest,//}
 //}
 
 const CryptoCard = (props) => {
@@ -18,7 +18,7 @@ const CryptoCard = (props) => {
     <div className= "crypto-card">
               
              <img 
-            src={"https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"}
+            src= {"https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"}
             alt={props.name}
             width="50"
             height= "50"/>
@@ -26,10 +26,10 @@ const CryptoCard = (props) => {
                 {props.quote &&<>   
                 <h2>{props.name}</h2>
                 <p>Current Price:  ${props.quote.USD.price.toFixed(2)}</p>
-                <p>Marcket Cap:    ${props.quote.USD.market_cap.toLocaleString()}</p>
+                <p>Market Cap:    ${props.quote.USD.market_cap.toLocaleString()}</p>
                 <p>24h Volume:     ${props.quote.USD.volume_24h.toLocaleString()}</p>
                 <p>24h Change:     {props.quote.USD.percent_change_24h.toFixed(2)}%</p>
-                <button onClick={handleAddWatchList}>Add Watchlist</button>
+                <button onClick={handleAddWatchList}><i className='fa-sharp fa-regular fa-camera-retro'></i></button>
                 </>
                 }
         

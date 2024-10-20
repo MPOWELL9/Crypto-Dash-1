@@ -9,8 +9,9 @@ const SearchPanel= (props) =>{
     
     }
    
-    const handleSelectChange =() => {
-        alert ('select change')
+    const handleSortTypeChange =(event) => {
+       // alert ('sort type change')
+       props.sortTypeCallback(event.target.value)
     }
         
     const handleKeyDown = (e) => {
@@ -35,9 +36,9 @@ const SearchPanel= (props) =>{
             placeholder="Search Cryptocurrency"
             value={searchText}
          />
-    <select onChange={handleSelectChange}>
+    <select onChange={handleSortTypeChange}>
             <option value= "market_cap"> Market Cap</option>
-            <option value="current_price">Price</option>
+            <option value="current_price">24h Price</option>
             <option value="total_volume">24h Volume</option>
             <option value="price_change_percentage_24h">24h Change</option>
     </select>
