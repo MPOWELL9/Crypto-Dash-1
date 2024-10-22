@@ -4,7 +4,7 @@ const WatchList =() => {
 
     useEffect(()=>{
 
-    };
+    });
 
     return<h1>Watchlist</h1>
 }
